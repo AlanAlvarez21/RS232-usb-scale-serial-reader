@@ -4,17 +4,16 @@ from datetime import datetime
 import openpyxl
 import os
 
-
 def convert_databases_to_excel():
   # Rutas de los archivos .dbf
   dbf_paths = [
-  '/Users/brito/Documents/datostablas/ipedidoc.dbf',
-  '/Users/brito/Documents/datostablas/ipedidod.dbf',
-  '/Users/brito/Documents/datostablas/oprod.dbf',
-  '/Users/brito/Documents/datostablas/ordproc.dbf',
-  '/Users/brito/Documents/datostablas/PEDIENTR.dbf',
-  '/Users/brito/Documents/datostablas/remc.dbf',
-  '/Users/brito/Documents/datostablas/remd.dbf',
+  './database_files/ipedidoc.dbf',
+  './database_files/ipedidod.dbf',
+  './database_files/oprod.dbf',
+  './database_files/ordproc.dbf',
+  './database_files/PEDIENTR.dbf',
+  './database_files/remc.dbf',
+  './database_files/remd.dbf',
   ]
 
   for i, dbf_path in enumerate(dbf_paths, start=1):
@@ -50,8 +49,6 @@ def convert_databases_to_excel():
         # Guarda el archivo de Excel
         excel_path = f'/Users/brito/excel_creator/excel_files/{base_name}.xlsx'
         wb.save(excel_path)
-
-
 def merge_files():
     excel_folder = '/Users/brito/excel_creator/excel_files/'
 
@@ -83,7 +80,7 @@ def merge_files():
     # Guarda el archivo fusionado con la fecha y hora al momento de generación 
     # merged_file_path = f"/Users/brito/excel_creator/{fecha_hora_str}.xlsx"
 
-    merged_file_path = f"/Users/brito/excel_creator/merged.xlsx"
+    merged_file_path = f"./merged.xlsx"
     merged_wb.save(merged_file_path)
 
 convert_databases_to_excel()
