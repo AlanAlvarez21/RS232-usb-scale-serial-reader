@@ -49,6 +49,7 @@ def convert_databases_to_excel():
         # Guarda el archivo de Excel
         excel_path = f'/Users/brito/excel_creator/excel_files/{base_name}.xlsx'
         wb.save(excel_path)
+        
 def merge_files():
     excel_folder = '/Users/brito/excel_creator/excel_files/'
 

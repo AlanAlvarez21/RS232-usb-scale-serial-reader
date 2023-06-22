@@ -1,3 +1,4 @@
 excel_files/*.xlsx
 database_files/*.dbf
 *.xlsx
+*.csv
