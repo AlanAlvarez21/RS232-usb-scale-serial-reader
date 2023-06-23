@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import serial
 import csv
 import serial.tools.list_ports
@@ -8,25 +10,23 @@ for puerto in puertos_disponibles:
     print(puerto.device)
 
 print('-------------------------------------------')
-puerto = 'COM1' # Modificar el puerto serial a leer  
-baudios = 9600  
+puerto = '/dev/cu.usbmodem11401' # Reemplaza '/dev/cu.usbmodem11401' con el nombre de tu puerto serial
 
-archivo_csv = 'datos.csv'
-delimiter = ','
+baudios = 9600  # Ajusta la velocidad de baudios según tu configuración
+archivo_csv = './peso.csv'  # Nombre del archivo CSV a crear/sobrescribir
 
-ser = serial.Serial(puerto, baudios)
-
-with open(archivo_csv, 'w', newline='') as archivo:
-    writer = csv.writer(archivo, delimiter=delimiter)
-    peso_actual = None
+try:
+    ser = serial.Serial(puerto, baudios)
+    print('Conexión establecida en el puerto', puerto)
 
     while True:
         if ser.in_waiting > 0:
-            datos = ser.readline().decode('utf-8').rstrip()
-            peso = datos  # Supongamos que el peso está en la variable "datos"
+            datos = ser.readline().decode().strip()
+            print('Datos recibidos:', datos)
 
-            if peso != peso_actual:
-                peso_actual = peso
-                writer.writerow([peso])
+            with open(archivo_csv, 'w', newline='') as archivo:
+                writer = csv.writer(archivo)
+                writer.writerow([datos])
 
-ser.close()
+except serial.SerialException as e:
+    print('Error de conexión:', str(e))
