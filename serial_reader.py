@@ -14,9 +14,11 @@ puerto = '/dev/cu.usbmodem11401' # Reemplaza '/dev/cu.usbmodem11401' con el nomb
 
 baudios = 9600  # Ajusta la velocidad de baudios según tu configuración
 archivo_csv = './peso.csv'  # Nombre del archivo CSV a crear/sobrescribir
+dbf_paths = ['.merged.xlsx']
 
 try:
-    ser = serial.Serial(puerto, baudios)
+    ser = serial.Serial(puerto, baudrate=115200, timeout=1, parity='N', stopbits=1, bytesize=8)
+
     print('Conexión establecida en el puerto', puerto)
 
     while True:
